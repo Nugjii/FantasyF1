@@ -1,0 +1,35 @@
+<h2>Сонголтоо өөрчилөх</h2>
+
+<% form_for(@selection) do |f| %>
+  <%= f.error_messages %>
+
+    <%= f.hidden_field :id_user %>
+    <%= f.hidden_field :id_track %>
+  <p>
+  	1-р нисгэгч:<br>
+	<%= collection_select(:selection, :id_pilot1, Pilot.all, :id, :lname, {:prompt => true}) %>
+  </p>
+  <p>
+  	2-р нисгэгч:<br>
+    <%= collection_select(:selection, :id_pilot2, Pilot.all, :id, :lname, {:prompt => true}) %>
+  </p>
+  <p>
+  	Хурдан тойрог:<br>
+    <%= collection_select(:selection, :id_pilot3, Pilot.all, :id, :lname, {:prompt => true}) %>
+  </p>
+  <% if @selection.is_bonus or @notselected > 1 %>
+  <p> 
+  	
+  	<%= f.label( :is_bonus, "Бонус гараа: ")%><%= f.check_box(:is_bonus) %>
+  </p>
+  <% else %>
+  <p> Сонголт хийлгүй өнгөрсөн гараа
+  	<%= @notselected%> байна.
+  </p>
+  <% end %>
+  <p>
+    <%= f.submit 'Хадгалах' %>
+  </p>
+<% end %>
+
+<%= link_to_current_user :content_text => "Буцах" %>

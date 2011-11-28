@@ -1,0 +1,33 @@
+<h1>Editing nresult</h1>
+
+<% form_for(@nresult) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+<%=Track.find(@nresult.id_track).name %>
+  </p>
+  <p>
+<%=Pilot.find(@nresult.id_pilot).lname %>
+  </p>
+  <p>
+    <%= f.label :pp_score %><br />
+    <%= f.text_field :pp_score %>
+  </p>
+  <p>
+    <%= f.label :df_score %><br />
+    <%= f.text_field :df_score %>
+  </p>
+  <p>
+    <%= f.label :gp_score %><br />
+    <%= f.text_field :gp_score %>
+  </p>
+  <p>
+    <%= f.label :fast_lap %><br />
+    <%= f.text_field :fast_lap %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', {:controller=>'nresults',:action=>'show_by_track',:id=>@nresult.id_track} %>

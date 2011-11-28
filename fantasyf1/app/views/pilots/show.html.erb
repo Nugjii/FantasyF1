@@ -1,0 +1,23 @@
+<p>
+  <b>Fname:</b>
+  <%=h @pilot.fname %>
+</p>
+
+<p>
+  <b>Lname:</b>
+  <%=h @pilot.lname %>
+</p>
+
+<p>
+  <b>Img url:</b>
+  <%=h @pilot.img_url %>
+</p>
+
+<p>
+  <b>Team:</b>
+  <%=h Team.find(@pilot.id_team).team_name %>
+</p>
+
+
+<%= link_to 'Edit', edit_pilot_path(@pilot) %> |
+<%= link_to 'Back', pilots_path %>

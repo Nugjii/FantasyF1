@@ -1,0 +1,17 @@
+<% if logged_in? -%>
+  <p>Нэвтэрсэн <%= link_to_current_user :content_method => :login %></p>
+  <p><%= link_to_current_user :content_text => 'Сонголтоо оруулах' %></p>
+  <ul>
+  	<li><%= link_to "Нууц үг солих", {:controller=>'users',:action=>'change_password'}, { :title => "Нууц үг солих" }    %></li>
+	<li><%= link_to "Гарах", logout_path, { :title => "Гарах" } %></li>
+  </ul>
+<% else -%>
+  <p><%= link_to_login_with_IP 'Хэрэглэгч нэвтрээгүй байна.', :style => 'border: none;' %></p>
+  <ul>
+  	<li><%= link_to "Нэвтрэх",  login_path,  { :title => "Нэвтрэх" } %></li>
+	<li><%= link_to "Бүртгүүлэх", signup_path, { :title => "Бүртгүүлэх" } %></li>
+	<li><%= link_to "Мартсан нууц үг сэргээх", forgot_password_path, { :title => "Мартсан нууц үг сэргээх" } %></li>
+  </ul>						   
+<% end -%>
+
+

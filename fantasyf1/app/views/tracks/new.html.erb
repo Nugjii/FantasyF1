@@ -1,0 +1,27 @@
+<h1>New track</h1>
+
+<% form_for(@track) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :qualify_time %><br />
+    <%= f.datetime_select :qualify_time %>
+  </p>
+  <p>
+    <%= f.label :track_img_url %><br />
+    <%= f.text_field :track_img_url %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', tracks_path %>

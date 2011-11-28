@@ -1,0 +1,23 @@
+<p>
+  <b>Name:</b>
+  <%=h @track.name %>
+</p>
+
+<p>
+  <b>Qualify time:</b>
+  <%=h @track.qualify_time %>
+</p>
+
+<p>
+  <b>Track img url:</b>
+  <%=h @track.track_img_url %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @track.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_track_path(@track) %> |
+<%= link_to 'Back', tracks_path %>

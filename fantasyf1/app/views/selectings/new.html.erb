@@ -1,0 +1,89 @@
+									<table cellpadding=0 cellspacing=0> 
+										<tr>
+											<td  style="width:150px; height:278px">
+												<br style="line-height:17px">
+												<img src="/images/t3_2.jpg" alt="" style="margin-left:26px"><br>
+											  <div style="margin-left:32px; margin-right:39px">
+<% form_for(@selecting) do |f| %>
+  <%= f.error_messages %>
+
+
+  <table width="150px" cellpadding="5">
+  	<tr>
+  		<td>
+  			1-р нисгэгч:
+  		</td>
+	</tr>
+	<tr>
+		<td>
+			<select name="selecting[id_gpilot1]">
+				<option value="0" selected>Select Pilot 1</option>
+		   	<% @pilots.each do |pilot| %>
+		       <option value="<%= pilot.id %>">
+		         <%= pilot.fname[0,1] %> <%= pilot.lname %>
+		       </option>
+		   	<% end %>
+		  	</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			2-р нисгэгч:
+		</td>
+  	</tr>
+	<tr>
+		<td>
+			<select name="selecting[id_gpilot2]">
+				<option value="0" selected>Select Pilot 2</option>
+		   	<% @pilots.each do |pilot| %>
+		       <option value="<%= pilot.id %>">
+		         <%= pilot.fname[0,1] %> <%= pilot.lname %>
+		       </option>
+		   	<% end %>
+		  	</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Fastest Lap:
+		</td>
+  	</tr>
+	<tr>
+		<td>
+			<select name="selecting[id_gpilot3]">
+				<option value="0" selected>Select Pilot</option>
+		   	<% @pilots.each do |pilot| %>
+		       <option value="<%= pilot.id %>">
+		         <%= pilot.fname[0,1] %> <%= pilot.lname %>
+		       </option>
+		   	<% end %>
+		  	</select>
+		</td>
+
+	</tr>
+	<tr>
+		<td>
+			<%= f.submit 'Submit' %><br>
+			Та сонголтоо зөвхөн нэг удаа оруулах бөгөөд засварлах боломжгүйг анхаарна уу.
+		</td>
+	</tr>
+  </table>
+
+<% end %>
+
+<p><%= link_to 'Буцах', selectings_path %></p>
+
+
+											  </div>
+											</td>
+											<td  style="width:371px; height:278px">
+											<br style="line-height:17px">
+												<img src="/images/t3_2.jpg" alt="" style="margin-left:26px"><br>
+<p>
+<%= @track.name %><br><br>
+<%= @track.description %>
+</p>
+											</td>
+										  </tr>
+										</table>
+

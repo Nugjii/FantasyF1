@@ -1,0 +1,21 @@
+	<table width="100%" cellspacing=0 cellpadding=2 border=0>
+  		<tr>
+  			<th>Д/Д</th>
+  			<th>Тоглогч</th>
+			<% @tracks.each do |track| %>
+			<th><%=h track.short_name %></th>
+			<% end %>
+			<th>Нийлбэр</th>
+  		</tr>										
+			<% cnt = 0 %>
+<% @scorings.each do |scoring| %>
+<% cnt = cnt + 1 %>
+<% color = (cnt%2 == 0)?"#333333":"#666666" %>
+<tr bgcolor="<%= color %>">
+<td><%=cnt %></td>
+<td><b><%= link_to_user User.find(scoring[0]) %></b></td>
+<% @tracks.each do |track| %><% @scr = VScore.find(:first, :order=>"id_track ASC", :conditions => { :id_user => scoring[0],:id_track => track.id }) %>
+<% if @scr %><td><% if @scr.is_bonus %><strong><%= @scr.all_score.to_i*2 %></strong><% else %><%= @scr.all_score.to_i%><% end %></td><% else %><td>0</td><% end %><% end %><td><%= scoring[1].to_i %></td>
+</tr>
+<% end %>
+	</table>

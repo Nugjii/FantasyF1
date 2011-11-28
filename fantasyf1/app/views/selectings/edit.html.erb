@@ -1,0 +1,75 @@
+<h1>Editing selecting</h1>
+
+<% form_for(@selecting) do |f| %>
+  <%= f.error_messages %>
+
+  <table>
+  	<tr>
+  		<th>
+  			PP:
+  		</th>
+		<th>
+			GP:
+		</th>
+  	</tr>
+	<tr>
+		<td>
+			<select name="selecting[id_ppilot1]">
+				<option value=0 <%= ' selected' if 0 == @selecting.id_ppilot1 %>>
+					Not selected
+				</option>
+		   	<% @pilots.each do |pilot| %>
+		       <option value="<%= pilot.id %>" <%= ' selected' if pilot.id == @selecting.id_ppilot1 %>>
+		         <%= pilot.fname[0,1] %> <%= pilot.lname %>
+		       </option>
+		   	<% end %>
+		  	</select>
+		</td>
+		<td>
+			<select name="selecting[id_gpilot1]">
+				<option value=0 <%= ' selected' if 0 == @selecting.id_gpilot1 %>>
+					Not selected
+				</option>
+		   	<% @pilots.each do |pilot| %>
+		       <option value="<%= pilot.id %>" <%= ' selected' if pilot.id == @selecting.id_gpilot1 %>>
+		         <%= pilot.fname[0,1] %> <%= pilot.lname %>
+		       </option>
+		   	<% end %>
+		  	</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<select name="selecting[id_ppilot2]">
+				<option value=0 <%= ' selected' if 0 == @selecting.id_ppilot2 %>>
+					Not selected
+				</option>
+		   	<% @pilots.each do |pilot| %>
+		       <option value="<%= pilot.id %>" <%= ' selected' if pilot.id == @selecting.id_ppilot2 %>>
+		         <%= pilot.fname[0,1] %> <%= pilot.lname %>
+		       </option>
+		   	<% end %>
+		  	</select>
+		</td>
+		<td>
+			<select name="selecting[id_gpilot2]">
+				<option value=0 <%= ' selected' if 0 == @selecting.id_gpilot2 %>>
+					Not selected
+				</option>
+		   	<% @pilots.each do |pilot| %>
+		       <option value="<%= pilot.id %>" <%= ' selected' if pilot.id == @selecting.id_gpilot2 %>>
+		         <%= pilot.fname[0,1] %> <%= pilot.lname %>
+		       </option>
+		   	<% end %>
+		  	</select>
+		</td>
+	</tr>
+  </table>
+  
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @selecting %> |
+<%= link_to 'Back', selectings_path %>

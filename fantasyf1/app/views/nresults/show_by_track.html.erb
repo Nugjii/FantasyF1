@@ -1,0 +1,29 @@
+<h1>Listing nresults</h1>
+
+<table>
+  <tr>
+    <th>Track</th>
+    <th>Pilot</th>
+    <th>Pp score</th>
+    <th>Df score</th>
+    <th>Gp score</th>
+	<th>Fast Lap Score</th>
+  </tr>
+
+<% @nresults.each do |nresult| %>
+  <tr>
+    <td><%=Track.find(nresult.id_track).name %></td>
+    <td><b><%=Pilot.find(nresult.id_pilot).lname %></b></td>
+    <td><%=h nresult.pp_score %></td>
+    <td><%=h nresult.df_score %></td>
+    <td><%=h nresult.gp_score %></td>
+	<td><%=h nresult.fast_lap %></td>
+    <td><%= link_to 'Edit', edit_nresult_path(nresult) %></td>
+    <td><%= link_to 'Destroy', nresult, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Back', nresults_path %>

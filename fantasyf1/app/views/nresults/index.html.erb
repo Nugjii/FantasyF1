@@ -1,0 +1,13 @@
+<h2>Choose track</h2>
+
+<table width="100%">
+<% @tracks.each do |track| %>
+  <tr>
+	<td><%= link_to track.name, {:controller=>'nresults',:action=>'show_by_track',:id=>track.id}%></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Fix nresult', {:controller=>'nresults',:action=>'new'} %>

@@ -1,0 +1,50 @@
+									<table cellpadding=0 cellspacing=0> 
+										<tr>
+											<td  style="width:521px; height:278px">
+												<br style="line-height:17px">
+												<img src="/images/t3_2.jpg" alt="" style="margin-left:26px"><br>
+											  <div style="margin-left:32px; margin-right:39px">
+<table width="100%">
+  <tr>
+    <td><b>Уралдаан</b></td>
+    <td><b>1-р нисгэгч</b></td>
+    <td><b>2-р нисгэгч</b></td>
+	<td><b>Fastest Lap</b></td>
+    <td><b>Оноо</b></td>
+  </tr>
+
+<% is_selected = false %>
+<% @selectings.each do |selecting| %>
+	<% if selecting.id_track == @track.id %>
+		<% is_selected = true %>
+	<% end %>
+  <tr>
+    <td><%= link_to Track.find(selecting.id_track).name, selecting %></td>
+    <td><%=h Pilot.find(selecting.id_gpilot1).lname %><br> </td>
+    <td><%=h Pilot.find(selecting.id_gpilot2).lname %></td>
+	<td><%=h Pilot.find(selecting.id_gpilot3).lname %></td>
+    <td><%=h selecting.pp_point %> + <%=h selecting.gp_point %></td>
+  </tr>
+  <tr>
+  	<td colspan=4><img src="/images/px.gif"></td>
+  </tr>
+<% end %>
+</table>
+
+<p>
+<% if @track %>
+	<% if @track.qualify_time > Time.new %>
+		<% if is_selected %>
+			Та <%= @track.name %> таавараа оруулсан байна.
+		<% else %>
+			<%= link_to @track.name+' Таавраа оруулах', new_selecting_path %>
+		<% end %>
+	<% else %>
+		<%= @track.name %> Уралдаан явагдаж байна.
+	<% end %>
+<% end %>
+</p>
+											  </div>
+											</td>
+										  </tr>
+										</table>

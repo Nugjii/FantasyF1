@@ -1,0 +1,23 @@
+<p>
+  <b>Id track:</b>
+  <%=h Track.find(@result.id_track).name %>
+</p>
+
+<p>
+  <b>Is pp:</b>
+  <%=h @result.is_pp %>
+</p>
+
+<p>
+  <b>Id pilot:</b>
+  <%=h Pilot.find(@result.id_pilot).lname %>
+</p>
+
+<p>
+  <b>Score:</b>
+  <%=h @result.score %>
+</p>
+
+
+<%= link_to 'Edit', edit_result_path(@result) %> |
+<%= link_to 'Back', results_path %>

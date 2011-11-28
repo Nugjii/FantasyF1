@@ -1,0 +1,31 @@
+<h1>New nresult</h1>
+
+<% form_for(@nresult) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :id_track %><br />
+    <%= f.text_field :id_track %>
+  </p>
+  <p>
+    <%= f.label :id_pilot %><br />
+    <%= f.text_field :id_pilot %>
+  </p>
+  <p>
+    <%= f.label :pp_score %><br />
+    <%= f.text_field :pp_score %>
+  </p>
+  <p>
+    <%= f.label :df_score %><br />
+    <%= f.text_field :df_score %>
+  </p>
+  <p>
+    <%= f.label :gp_score %><br />
+    <%= f.text_field :gp_score %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', nresults_path %>

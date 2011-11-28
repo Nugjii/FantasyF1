@@ -1,0 +1,17 @@
+<h1>Нэвтрэх</h1>
+
+<% form_tag session_path do -%>
+<p><%= label_tag 'login', 'Хэрэглэгч' %><br />
+<%= text_field_tag 'login', @login %></p>
+
+<p><%= label_tag 'password', 'Нууц үг' %><br/>
+<%= password_field_tag 'password', nil %></p>
+
+
+<p><%= label_tag 'remember_me', 'Намайг сануулах' %>
+<%= check_box_tag 'remember_me', '1', @remember_me %></p>
+
+
+<p><%= submit_tag 'Нэвтрэх' %></p>
+<p><%= link_to 'Мартсан нууц үг сануулах', forgot_password_url %></p>
+<% end -%>

@@ -1,0 +1,79 @@
+<% if @user %>
+<h3>
+	Хэрэглэгч: <%= @user.login %> 
+</h3>
+<table width="100%">
+	<tr>
+		<th rowspan="2">Зам</th>
+		<th colspan="3">Таавар</th>
+		<th colspan="4">Оноо</th>
+		<th title="Нийт">Нийт</th>
+	</tr>
+	<tr>
+		<th>1-р Нисгэгч</th>
+		<th>2-р Нисгэгч</th>
+		<th>Хурдан тойрог</th>
+		<th title="Байрлал тогтоох оноо (Pole Position)">PP</th>
+		<th title="Шагнал оноо (Bonus Point)">BP</th>
+		<th title="Уралдааны оноо (Grand Prix)">GP</th>
+		<th title="Хурдан тойрогийн оноо (Fastest Lap)">FL</th>
+
+	</tr>
+	<% @tracks.each do |track| %>
+	<% @slctn = Selection.first(:select=>"selections.id,selections.is_bonus,id_pilot1,id_pilot2,id_pilot3,(IFNULL(pilot1.pp_score,0)+IFNULL(pilot2.pp_score,0)) AS pp_score, (IFNULL(pilot1.df_score,0)+IFNULL(pilot2.df_score,0)) AS df_score, 
+(IFNULL(pilot1.gp_score,0)+IFNULL(pilot2.gp_score,0)) AS gp_score, IFNULL(pilot3.fast_lap,0) AS fast_lap_score",
+ :joins=>"LEFT JOIN nresults pilot1 ON selections.id_track = pilot1.id_track AND selections.id_pilot1 = pilot1.id_pilot
+LEFT JOIN nresults pilot2 ON selections.id_track = pilot2.id_track AND selections.id_pilot2 = pilot2.id_pilot
+LEFT JOIN nresults pilot3 ON selections.id_track = pilot3.id_track AND selections.id_pilot3 = pilot3.id_pilot", :conditions=>{:id_track=>track.id, :id_user=>@user.id } ) %>
+	<tr>
+		<th>
+			<%= track.name %>
+		</th>
+		<% if current_user == nil or (@user.id != current_user.id and current_user.login != "admin") or (track.qualify_time < Time.now and current_user.login != "admin")%>
+			<% if @slctn%>
+			<td><%= @slctn.id_pilot1 ? Pilot.find(@slctn.id_pilot1).lname : "&nbsp;" %></td>
+			<td><%= @slctn.id_pilot2 ? Pilot.find(@slctn.id_pilot2).lname : "&nbsp;" %></td>
+			<td><%= @slctn.id_pilot3 ? Pilot.find(@slctn.id_pilot3).lname : "&nbsp;" %></td>
+			<% if @slctn.is_bonus %>
+			<td><strong><%= @slctn.pp_score.to_i*2 %></strong></td>
+			<td><strong><%= @slctn.df_score.to_i*2 %></strong></td>
+			<td><strong><%= @slctn.gp_score.to_i*2 %></strong></td>
+			<td><strong><%= @slctn.fast_lap_score.to_i*2 %></strong></td>
+			<td><strong><%= (@slctn.pp_score.to_i+@slctn.df_score.to_i+@slctn.gp_score.to_i+@slctn.fast_lap_score.to_i)*2 %></strong></td>
+			<% else %>
+			<td><%= @slctn.pp_score.to_i %></td>
+			<td><%= @slctn.df_score.to_i %></td>
+			<td><%= @slctn.gp_score.to_i %></td>
+			<td><%= @slctn.fast_lap_score.to_i %></td>
+			<td><%= (@slctn.pp_score.to_i+@slctn.df_score.to_i+@slctn.gp_score.to_i+@slctn.fast_lap_score.to_i) %></td>
+			<% end %>
+			<% else %>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>0</td>
+			<td>0</td>
+			<td>0</td>
+			<td>0</td>
+			<td>0</td>
+			<% end %>
+		<% else %>
+			<% if @slctn%>
+			<td><%= @slctn.id_pilot1 ? Pilot.find(@slctn.id_pilot1).lname : "&nbsp;" %></td>
+			<td><%= @slctn.id_pilot2 ? Pilot.find(@slctn.id_pilot2).lname : "&nbsp;" %></td>
+			<td><%= @slctn.id_pilot3 ? Pilot.find(@slctn.id_pilot3).lname : "&nbsp;" %></td>
+			<td colspan="5"><%= link_to 'Өөрчилөх', edit_selection_path(@slctn) %></td>
+			<% else %>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td colspan="5"><%= link_to 'Оруулах', {:controller => "selections", :action=>"new", :id_track => track.id, :id_user => @user.id} %></td>
+			<% end %>
+		<% end %>
+	</tr>
+	<% end %>
+</table>
+
+<% else %>
+<h3>Хэрэглэгч олдсонгүй</h3>
+<% end %>

@@ -1,0 +1,26 @@
+<h1>Listing pilots</h1>
+
+<table>
+  <tr>
+    <th>Fname</th>
+    <th>Lname</th>
+    <th>Img url</th>
+    <th>Id team</th>
+  </tr>
+
+<% @pilots.each do |pilot| %>
+  <tr>
+    <td><%=h pilot.fname %></td>
+    <td><%=h pilot.lname %></td>
+    <td><%=h pilot.img_url %></td>
+    <td><%=h Team.find(pilot.id_team).team_name %></td>
+    <td><%= link_to 'Show', pilot %></td>
+    <td><%= link_to 'Edit', edit_pilot_path(pilot) %></td>
+    <td><%= link_to 'Destroy', pilot, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New pilot', new_pilot_path %>

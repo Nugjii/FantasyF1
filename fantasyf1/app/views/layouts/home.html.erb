@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta property="og:title" content="Fantasy F1 Game" />
+<meta property="og:type" content="game" />
+<meta property="og:url" content="http://fantasyf1.ic.mn/" />
+<meta property="og:image" content="http://fantasyf1.ic.mn/images/logo.jpg" />
+<meta property="og:site_name" content="Manage your own F1 team" />
+<meta property="fb:admins" content="1327266133" />
+<title>Fantasy Formula1</title>
+<style type="text/css" media="all">
+<!--
+@import url("/stylesheets/styles.css");
+.style1 {font-family: Arial, Helvetica, sans-serif}
+-->
+</style>
+<style type="text/css">
+@import url("/stylesheets/jquery.countdown.css");
+
+#defaultCountdown { width: 240px; height: 45px; }
+</style>
+<script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.countdown.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.countdown-mn.js"></script>
+<% if @comingtrack %>
+<script type="text/javascript">
+$(function () {
+	var austDay = new Date();
+	austDay.setUTCFullYear(<%= @d_year %>, <%= @d_month %>, <%= @d_day %>);
+	austDay.setUTCHours(<%= @d_hour %>);
+	austDay.setUTCMinutes(<%= @d_minut %>);
+	austDay.setUTCSeconds(<%= @d_second %>);
+	$('#defaultCountdown').countdown({until: austDay});
+	$('#titleCountdown').html('<img src="<%= @comingtrack.track_img_url%>" align="middle" style="background-color:#FFFFFF" /> <%= @comingtrack.name%> эхлэхэд ');
+});
+</script>
+<% else%>
+<script type="text/javascript">
+$(function () {
+$('#defaultCountdown').hide(); 
+$('#titleCountdown').hide();
+});
+</script>
+<% end %>
+</head>
+<body>
+<div id="header" style="background-image:url(/images/subpage-header.jpg)">
+  <div id="logo"><a href="#"><img src="/images/logo.jpg" alt="Logo" width="299" height="54" /></a>
+    </div>
+  <div id="links">
+<iframe src="http://www.facebook.com/plugins/like.php?app_id=230714733609496&amp;href=http%3A%2F%2Ffantasyf1.ic.mn%2F&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=dark&amp;font&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:35px;" allowTransparency="true"></iframe>
+  </div>
+  <div class="clearFloat"></div>
+</div>
+<div id="outerWrapper">
+  <div id="gradient">
+    <div id="nav">
+      <ul>
+        <li><a href="/home" class="style1">Нvvр</a></li>
+        <li><a href="/scores">Оноо</a></li>
+        <li><a href="/rule">Тоглоомын дvрэм</a></li>
+		<li><a href="http://www.mnformula1.com/">MN Formula1</a></li>
+        <li><a href="http://mnformula1.blogspot.com/">MN Formula1 Blog</a></li>
+      </ul>
+      <img src="/images/subpage-navimage.jpg" alt="Subpage Navigation Image" width="217" height="62" class="subpage-navimage" /> </div>
+    <div id="spacer"></div>
+    <div id="feature" style="display:none;"></div>
+    <div id="contentWrapper">
+      <div id="leftColumn1">
+        <div id="leftColumnContent">
+        	<h3>Хэрэглэгчийн булан</h3>
+			<br>
+<%= render :partial => "users/user_bar" %> 
+
+        </div>
+      </div>
+      <div id="content"> 
+      <img src="/images/content-header.jpg" id="content-image" /><br />
+<table border="0" cellspacing="0" cellpadding="5">
+    <tr>
+        <td align="right" valign="middle"><div id="titleCountdown"></div>
+        </td>
+        <td align="left" valign="middle"><div id="defaultCountdown"></div>
+        </td>
+    </tr>
+</table>
+
+   	<% if flash[:notice] %>
+	<p><%= flash[:notice] %></p>
+	<% end %>
+	<% if flash[:error] %>
+	<p><font color="red"><%= flash[:error] %></font></p>
+	<% end %>
+				<%= yield %>
+      </div>
+      <br class="clearFloat" />
+    </div>
+    <img src="http://www.justdreamweaver.com/templates/link/spacer.gif" width="1" height="1" />
+    <div id="footer">Copyright &copy; 2010 Fantasy F1</div>
+  
+  </div>
+</div>
+<div id="credit"><a href="http://www.justdreamweaver.com/dreamweaver-templates.html">Dreamweaver template</a> by <a href="http://www.justdreamweaver.com">JustDreamweaver.com</a></div>
+</body>
+</html>
