@@ -1,0 +1,2 @@
+module NresultsHelper
+end

@@ -1,0 +1,61 @@
+
+	<h2>Оноо</h2>
+	<table width="100%" cellspacing=0 cellpadding=2 border=0>
+  		<tr>
+  			<th>Д/Д</th>
+  			<th>Тоглогч</th>
+			<% @tracks.each do |track| %>
+			<th><%=h track.short_name %></th>
+			<% end %>
+			<th>Нийлбэр</th>
+  		</tr>										
+			<% cnt = 0 %>
+<% @scorings.each do |scoring| %>
+<% if cnt >= 30 %><% break %><% end %><% cnt = cnt + 1 %>
+<% color = (cnt%2 == 0)?"#333333":"#666666" %>
+<tr bgcolor="<%= color %>">
+<td><%=cnt %></td>
+<td><b><%= link_to_user User.find(scoring[0]) %></b></td>
+<% @tracks.each do |track| %><% @scr = VScore.find(:first, :conditions => { :id_user => scoring[0],:id_track => track.id }) %>
+<% if @scr %><td><% if @scr.is_bonus %><strong><%= @scr.all_score.to_i*2 %></strong><% else %><%= @scr.all_score.to_i%><% end %></td><% else %><td>0</td><% end %><% end %><td><%= scoring[1].to_i %></td>
+</tr>
+<% end %>
+	</table>
+<%= link_to "Дэлгэрэнгүй",:controller => "scores", :action => "index" %>
+<br><br>
+
+<table width="100%">
+	<tr>
+		<td>
+
+	<% cnt = 0 %>
+	<% @boards.each do |board| %>
+		<% if cnt >= 30 %>
+		<% break %>
+		<% end %>
+<div class="sidebardk">
+		<b>
+			<% if board.id_user %>
+			<%= link_to_user User.find(board.id_user) %>
+			<% else %>
+			Зочин
+			<% end %>
+			 | <%=h board.created_at.strftime("%b-%d %I:%M%p")%> </b>
+		<pre><%=h board.comment %></pre>
+</div>
+	<% cnt = cnt + 1 %>
+	<% end %>
+<% form_for(:board,@board,:url =>{:controller => 'home', :action => 'add_comment'}) do |f| %>
+  <%= f.error_messages %>
+  <div class="sidebardk">
+	<p>
+	<%= f.text_area :comment, :size => "60x6" %><br><%= f.submit 'Оруулах' %>
+	</p> 
+  </div>
+<% end %>
+		</td>
+	</tr>
+
+</table>
+
+
